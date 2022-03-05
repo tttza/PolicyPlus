@@ -2,7 +2,6 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -75,15 +74,14 @@ namespace PolicyPlus
 
             void takeOwnership(string Folder)
             {
-                var folderInfo = new System.IO.DirectoryInfo(Folder);
-                var dacl = System.IO.FileSystemAclExtensions.GetAccessControl(folderInfo);
+                var dacl = System.IO.Directory.GetAccessControl(Folder);
                 var adminSid = new System.Security.Principal.SecurityIdentifier(System.Security.Principal.WellKnownSidType.BuiltinAdministratorsSid, null);
                 dacl.SetOwner(adminSid);
-                System.IO.FileSystemAclExtensions.SetAccessControl(folderInfo, dacl);
-                dacl = System.IO.FileSystemAclExtensions.GetAccessControl(folderInfo);
+                System.IO.Directory.SetAccessControl(Folder, dacl);
+                dacl = System.IO.Directory.GetAccessControl(Folder);
                 var allowRule = new System.Security.AccessControl.FileSystemAccessRule(adminSid, System.Security.AccessControl.FileSystemRights.FullControl, System.Security.AccessControl.AccessControlType.Allow);
                 dacl.AddAccessRule(allowRule);
-                System.IO.FileSystemAclExtensions.SetAccessControl(folderInfo, dacl);
+                System.IO.Directory.SetAccessControl(Folder, dacl);
             };
             void moveFilesInDir(string Source, string Dest, bool InheritAcl)
             {
@@ -95,7 +93,7 @@ namespace PolicyPlus
                     {
                         var dirAcl = new System.Security.AccessControl.DirectorySecurity();
                         dirAcl.SetAccessRuleProtection(false, true);
-                        System.IO.FileSystemAclExtensions.SetAccessControl(new DirectoryInfo(Dest), dirAcl);
+                        System.IO.Directory.SetAccessControl(Dest, dirAcl);
                     }
                     else if (!creatingNew)
                     {
@@ -114,8 +112,7 @@ namespace PolicyPlus
                     {
                         var fileAcl = new System.Security.AccessControl.FileSecurity();
                         fileAcl.SetAccessRuleProtection(false, true);
-                        var newFileInfo = new FileInfo(newName);
-                        newFileInfo.SetAccessControl(fileAcl);
+                        System.IO.File.SetAccessControl(newName, fileAcl);
                     }
                 }
             };
