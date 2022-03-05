@@ -75,27 +75,27 @@ namespace PolicyPlus
 
             void takeOwnership(string Folder)
             {
-                var folderInfo = new System.IO.DirectoryInfo(Folder);
-                var dacl = System.IO.FileSystemAclExtensions.GetAccessControl(folderInfo);
+                var folderInfo = new DirectoryInfo(Folder);
+                var dacl = FileSystemAclExtensions.GetAccessControl(folderInfo);
                 var adminSid = new System.Security.Principal.SecurityIdentifier(System.Security.Principal.WellKnownSidType.BuiltinAdministratorsSid, null);
                 dacl.SetOwner(adminSid);
-                System.IO.FileSystemAclExtensions.SetAccessControl(folderInfo, dacl);
-                dacl = System.IO.FileSystemAclExtensions.GetAccessControl(folderInfo);
+                FileSystemAclExtensions.SetAccessControl(folderInfo, dacl);
+                dacl = FileSystemAclExtensions.GetAccessControl(folderInfo);
                 var allowRule = new System.Security.AccessControl.FileSystemAccessRule(adminSid, System.Security.AccessControl.FileSystemRights.FullControl, System.Security.AccessControl.AccessControlType.Allow);
                 dacl.AddAccessRule(allowRule);
-                System.IO.FileSystemAclExtensions.SetAccessControl(folderInfo, dacl);
+                FileSystemAclExtensions.SetAccessControl(folderInfo, dacl);
             };
             void moveFilesInDir(string Source, string Dest, bool InheritAcl)
             {
-                bool creatingNew = !System.IO.Directory.Exists(Dest);
-                System.IO.Directory.CreateDirectory(Dest);
+                bool creatingNew = !Directory.Exists(Dest);
+                Directory.CreateDirectory(Dest);
                 if (isAdmin)
                 {
                     if (creatingNew & InheritAcl)
                     {
                         var dirAcl = new System.Security.AccessControl.DirectorySecurity();
                         dirAcl.SetAccessRuleProtection(false, true);
-                        System.IO.FileSystemAclExtensions.SetAccessControl(new DirectoryInfo(Dest), dirAcl);
+                        FileSystemAclExtensions.SetAccessControl(new DirectoryInfo(Dest), dirAcl);
                     }
                     else if (!creatingNew)
                     {
@@ -103,13 +103,13 @@ namespace PolicyPlus
                     }
                 }
 
-                foreach (var file in System.IO.Directory.EnumerateFiles(Source))
+                foreach (var file in Directory.EnumerateFiles(Source))
                 {
-                    string plainFilename = System.IO.Path.GetFileName(file);
-                    string newName = System.IO.Path.Combine(Dest, plainFilename);
-                    if (System.IO.File.Exists(newName))
-                        System.IO.File.Delete(newName);
-                    System.IO.File.Move(file, newName);
+                    string plainFilename = Path.GetFileName(file);
+                    string newName = Path.Combine(Dest, plainFilename);
+                    if (File.Exists(newName))
+                        File.Delete(newName);
+                    File.Move(file, newName);
                     if (isAdmin)
                     {
                         var fileAcl = new System.Security.AccessControl.FileSecurity();
@@ -125,7 +125,7 @@ namespace PolicyPlus
                 try
                 {
                     string tempPath = Environment.ExpandEnvironmentVariables(@"%localappdata%\PolicyPlusAdmxDownload\");
-                    System.IO.Directory.CreateDirectory(tempPath);
+                    Directory.CreateDirectory(tempPath);
                     failPhase = "download the package";
                     setProgress("Downloading MSI from Microsoft...");
                     string downloadPath = tempPath + "W10Admx.msi";
@@ -141,8 +141,8 @@ namespace PolicyPlus
                     proc.WaitForExit();
                     if (proc.ExitCode != 0)
                         throw new Exception(); // msiexec failed
-                    System.IO.File.Delete(downloadPath);
-                    if (System.IO.Directory.Exists(destination) & isAdmin)
+                    File.Delete(downloadPath);
+                    if (Directory.Exists(destination) & isAdmin)
                     {
                         failPhase = "take control of the destination";
                         setProgress("Securing destination...");
@@ -157,7 +157,7 @@ namespace PolicyPlus
                     string langSubfolder = System.Globalization.CultureInfo.CurrentCulture.Name;
                     moveFilesInDir(unpackedDefsPath, destination, false);
                     string sourceAdmlPath = unpackedDefsPath + @"\" + langSubfolder;
-                    if (System.IO.Directory.Exists(sourceAdmlPath))
+                    if (Directory.Exists(sourceAdmlPath))
                         moveFilesInDir(sourceAdmlPath, destination + @"\" + langSubfolder, true);
                     if (langSubfolder != "en-US")
                     {
@@ -167,7 +167,7 @@ namespace PolicyPlus
 
                     failPhase = "remove temporary files";
                     setProgress("Cleaning up...");
-                    System.IO.Directory.Delete(tempPath, true);
+                    Directory.Delete(tempPath, true);
                     setProgress("Done.");
                     Invoke(new Action(() =>
                     {

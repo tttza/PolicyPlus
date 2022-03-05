@@ -91,7 +91,7 @@ namespace PolicyPlus
                     }
             }
 
-            FormattedPolPathBox.Text += System.Environment.NewLine + "  + " + TranslateWords("Administrative Templates", languageCode);
+            FormattedPolPathBox.Text += Environment.NewLine + "  + " + TranslateWords("Administrative Templates", languageCode);
 
 
             var parentNames = GetParentNames(Policy.Category);
@@ -99,10 +99,10 @@ namespace PolicyPlus
             var depth_count = 2;
             foreach (var name in parentNames)
             {
-                FormattedPolPathBox.Text += String.Concat(System.Environment.NewLine, new String(' ', 2 * depth_count), "+ ", name);
+                FormattedPolPathBox.Text += String.Concat(Environment.NewLine, new String(' ', 2 * depth_count), "+ ", name);
                 depth_count++;
             }
-            FormattedPolPathBox.Text += String.Concat(System.Environment.NewLine, new String(' ', 2 * depth_count), " ", Policy.DisplayName);
+            FormattedPolPathBox.Text += String.Concat(Environment.NewLine, new String(' ', 2 * depth_count), " ", Policy.DisplayName);
 
         }
 
@@ -164,36 +164,36 @@ namespace PolicyPlus
             return $"{TranslateWords("Value", languageCode)}: {value}";
         }
 
-        private string GetRegTypeString(Microsoft.Win32.RegistryValueKind rvk, string languageCode)
+        private string GetRegTypeString(RegistryValueKind rvk, string languageCode)
         {
             var typeStr = $"{TranslateWords("Type", languageCode)}: ";
             switch (rvk)
             {
-                case Microsoft.Win32.RegistryValueKind.DWord:
+                case RegistryValueKind.DWord:
                     typeStr += "REG_DWORD";
                     break;
 
-                case Microsoft.Win32.RegistryValueKind.QWord:
+                case RegistryValueKind.QWord:
                     typeStr += "REG_QWORD";
                     break;
 
-                case Microsoft.Win32.RegistryValueKind.String:
+                case RegistryValueKind.String:
                     typeStr += "REG_SZ";
                     break;
 
-                case Microsoft.Win32.RegistryValueKind.ExpandString:
+                case RegistryValueKind.ExpandString:
                     typeStr += "REG_EXPAND_SZ";
                     break;
 
-                case Microsoft.Win32.RegistryValueKind.Binary:
+                case RegistryValueKind.Binary:
                     typeStr += "REG_BINARY";
                     break;
 
-                case Microsoft.Win32.RegistryValueKind.MultiString:
+                case RegistryValueKind.MultiString:
                     typeStr += "REG_MULTI_SZ";
                     break;
 
-                case Microsoft.Win32.RegistryValueKind.None:
+                case RegistryValueKind.None:
                     typeStr += "None";
                     break;
 
@@ -323,7 +323,7 @@ namespace PolicyPlus
                 }
             }
 
-            var filteredKeys = new List<PolicyPlus.RegFile.RegFileKey>() { };
+            var filteredKeys = new List<RegFile.RegFileKey>() { };
 
             try
             {
@@ -374,7 +374,7 @@ namespace PolicyPlus
         String GetRegistryString(IPolicySource source, PolicyState policyState, PolicyPlusPolicy policy, bool isUser, string languageCode)
         {
             var regStr = "";
-            var nl = System.Environment.NewLine;
+            var nl = Environment.NewLine;
             void setValue(string Key, string ValueName, PolicyRegistryValue Value)
             {
                 if (Value is null)
@@ -396,7 +396,7 @@ namespace PolicyPlus
                             //PolicySource.SetValue(Key, ValueName, Value.NumberValue, Microsoft.Win32.RegistryValueKind.DWord);
                             regStr += $"{GetRegPathString(Key, languageCode, isUser)}{nl}";
                             regStr += $"{GetRegKeyString(ValueName, languageCode)}{nl}";
-                            regStr += $"{GetRegTypeString(Microsoft.Win32.RegistryValueKind.DWord, languageCode)}{nl}";
+                            regStr += $"{GetRegTypeString(RegistryValueKind.DWord, languageCode)}{nl}";
                             regStr += $"{GetRegValueString(Value.NumberValue.ToString(), languageCode)}{nl}";
                             regStr += $"{nl}";
                             break;
@@ -407,7 +407,7 @@ namespace PolicyPlus
                             //PolicySource.SetValue(Key, ValueName, Value.StringValue, Microsoft.Win32.RegistryValueKind.String);
                             regStr += $"{GetRegPathString(Key, languageCode, isUser)}{nl}";
                             regStr += $"{GetRegKeyString(ValueName, languageCode)}{nl}";
-                            regStr += $"{GetRegTypeString(Microsoft.Win32.RegistryValueKind.String, languageCode)}{nl}";
+                            regStr += $"{GetRegTypeString(RegistryValueKind.String, languageCode)}{nl}";
                             regStr += $"{GetRegValueString(Value.StringValue, languageCode)}{nl}";
                             regStr += $"{nl}";
                             break;
@@ -453,7 +453,7 @@ namespace PolicyPlus
                             //PolicySource.SetValue(rawpol.RegistryKey, rawpol.RegistryValue, 1U, Microsoft.Win32.RegistryValueKind.DWord);
                             regStr += $"{GetRegPathString(rawpol.RegistryKey, languageCode, isUser)}{nl}";
                             regStr += $"{GetRegKeyString(rawpol.RegistryValue, languageCode)}{nl}";
-                            regStr += $"{GetRegTypeString(Microsoft.Win32.RegistryValueKind.DWord, languageCode)}{nl}";
+                            regStr += $"{GetRegTypeString(RegistryValueKind.DWord, languageCode)}{nl}";
                             regStr += $"{GetRegValueString(1U.ToString(), languageCode)}{nl}";
                             regStr += $"{nl}";
                         }
@@ -477,7 +477,7 @@ namespace PolicyPlus
                                                 //PolicySource.SetValue(elemKey, elem.RegistryValue, Conversions.ToString(optionData), Microsoft.Win32.RegistryValueKind.String);
                                                 regStr += $"{GetRegPathString(elemKey, languageCode, isUser)}{nl}";
                                                 regStr += $"{GetRegKeyString(elem.RegistryValue, languageCode)}{nl}";
-                                                regStr += $"{GetRegTypeString(Microsoft.Win32.RegistryValueKind.String, languageCode)}{nl}";
+                                                regStr += $"{GetRegTypeString(RegistryValueKind.String, languageCode)}{nl}";
                                                 regStr += $"{GetRegValueString(optionData.ToString(), languageCode)}{nl}";
                                                 regStr += $"{nl}";
                                             }
@@ -486,7 +486,7 @@ namespace PolicyPlus
                                                 //PolicySource.SetValue(elemKey, elem.RegistryValue, Conversions.ToUInteger(optionData), Microsoft.Win32.RegistryValueKind.DWord);
                                                 regStr += $"{GetRegPathString(elemKey, languageCode, isUser)}{nl}";
                                                 regStr += $"{GetRegKeyString(elem.RegistryValue, languageCode)}{nl}";
-                                                regStr += $"{GetRegTypeString(Microsoft.Win32.RegistryValueKind.DWord, languageCode)}{nl}";
+                                                regStr += $"{GetRegTypeString(RegistryValueKind.DWord, languageCode)}{nl}";
                                                 regStr += $"{GetRegValueString(optionData.ToString(), languageCode)}{nl}";
                                                 regStr += $"{nl}";
                                             }
@@ -503,7 +503,7 @@ namespace PolicyPlus
                                                 //PolicySource.SetValue(elemKey, elem.RegistryValue, 1U, Microsoft.Win32.RegistryValueKind.DWord);
                                                 regStr += $"{GetRegPathString(elemKey, languageCode, isUser)}{nl}";
                                                 regStr += $"{GetRegKeyString(elem.RegistryValue, languageCode)}{nl}";
-                                                regStr += $"{GetRegTypeString(Microsoft.Win32.RegistryValueKind.DWord, languageCode)}{nl}";
+                                                regStr += $"{GetRegTypeString(RegistryValueKind.DWord, languageCode)}{nl}";
                                                 regStr += $"{GetRegValueString(1U.ToString(), languageCode)}{nl}";
                                                 regStr += $"{nl}";
                                             }
@@ -513,7 +513,7 @@ namespace PolicyPlus
                                                 //PolicySource.DeleteValue(elemKey, elem.RegistryValue);
                                                 regStr += $"{GetRegPathString(elemKey, languageCode, isUser)}{nl}";
                                                 regStr += $"{GetRegKeyString(elem.RegistryValue, languageCode)}{nl}";
-                                                regStr += $"{GetRegTypeString(Microsoft.Win32.RegistryValueKind.None, languageCode)}{nl}";
+                                                regStr += $"{GetRegTypeString(RegistryValueKind.None, languageCode)}{nl}";
                                                 regStr += $"{GetRegValueString("UNSET", languageCode)}{nl}";
                                                 regStr += $"{nl}";
                                             }
@@ -525,7 +525,7 @@ namespace PolicyPlus
                                     case "text":
                                         {
                                             TextPolicyElement textElem = (TextPolicyElement)elem;
-                                            var regType = textElem.RegExpandSz ? Microsoft.Win32.RegistryValueKind.ExpandString : Microsoft.Win32.RegistryValueKind.String;
+                                            var regType = textElem.RegExpandSz ? RegistryValueKind.ExpandString : RegistryValueKind.String;
                                             //PolicySource.SetValue(elemKey, elem.RegistryValue, optionData, regType);
                                             regStr += $"{GetRegPathString(elemKey, languageCode, isUser)}{nl}";
                                             regStr += $"{GetRegKeyString(elem.RegistryValue, languageCode)}{nl}";
@@ -542,7 +542,7 @@ namespace PolicyPlus
                                                 //PolicySource.ClearKey(elemKey);
                                                 if (optionData is null)
                                                     continue;
-                                            var regType = listElem.RegExpandSz ? Microsoft.Win32.RegistryValueKind.ExpandString : Microsoft.Win32.RegistryValueKind.String;
+                                            var regType = listElem.RegExpandSz ? RegistryValueKind.ExpandString : RegistryValueKind.String;
                                             if (listElem.UserProvidesNames)
                                             {
                                                 regStr += $"{GetRegPathString(elemKey, languageCode, isUser)}{nl}";
@@ -590,7 +590,7 @@ namespace PolicyPlus
                                             //PolicySource.SetValue(elemKey, elem.RegistryValue, optionData, Microsoft.Win32.RegistryValueKind.MultiString);
                                             regStr += $"{GetRegPathString(elemKey, languageCode, isUser)}{nl}";
                                             regStr += $"{GetRegKeyString(elem.RegistryValue, languageCode)}{nl}";
-                                            regStr += $"{GetRegTypeString(Microsoft.Win32.RegistryValueKind.MultiString, languageCode)}{nl}";
+                                            regStr += $"{GetRegTypeString(RegistryValueKind.MultiString, languageCode)}{nl}";
                                             regStr += $"{GetRegValueString(optionData.ToString(), languageCode)}{nl}";
                                             regStr += $"{nl}";
                                             break;
@@ -663,7 +663,7 @@ namespace PolicyPlus
                             //PolicySource.DeleteValue(rawpol.RegistryKey, rawpol.RegistryValue);
                             regStr += $"{GetRegPathString(rawpol.RegistryKey, languageCode, isUser)}{nl}";
                             regStr += $"{GetRegKeyString(rawpol.RegistryValue, languageCode)}{nl}";
-                            regStr += $"{GetRegTypeString(Microsoft.Win32.RegistryValueKind.DWord, languageCode)}{nl}";
+                            regStr += $"{GetRegTypeString(RegistryValueKind.DWord, languageCode)}{nl}";
                             regStr += $"Delete the value.{nl}";
                             regStr += $"{nl}";
 
@@ -673,7 +673,7 @@ namespace PolicyPlus
                                 //PolicySource.SetValue(rawpol.RegistryKey, rawpol.RegistryValue, 1U, Microsoft.Win32.RegistryValueKind.DWord);
                                 regStr += $"{GetRegPathString(rawpol.RegistryKey, languageCode, isUser)}{nl}";
                                 regStr += $"{GetRegKeyString(rawpol.RegistryValue, languageCode)}{nl}";
-                                regStr += $"{GetRegTypeString(Microsoft.Win32.RegistryValueKind.DWord, languageCode)}{nl}";
+                                regStr += $"{GetRegTypeString(RegistryValueKind.DWord, languageCode)}{nl}";
                                 regStr += $"Delete the value.{nl}";
                                 regStr += $"{nl}";
                             }
@@ -702,7 +702,7 @@ namespace PolicyPlus
                                             //PolicySource.SetValue(Key, ValueName, Value.NumberValue, Microsoft.Win32.RegistryValueKind.DWord);
                                             regStr += $"{GetRegPathString(Key, languageCode, isUser)}{nl}";
                                             regStr += $"{GetRegKeyString(ValueName, languageCode)}{nl}";
-                                            regStr += $"{GetRegTypeString(Microsoft.Win32.RegistryValueKind.DWord, languageCode)}{nl}";
+                                            regStr += $"{GetRegTypeString(RegistryValueKind.DWord, languageCode)}{nl}";
                                             regStr += $"Delete the value.{nl}";
                                             regStr += $"{nl}";
                                             break;
@@ -713,7 +713,7 @@ namespace PolicyPlus
                                             //PolicySource.SetValue(Key, ValueName, Value.StringValue, Microsoft.Win32.RegistryValueKind.String);
                                             regStr += $"{GetRegPathString(Key, languageCode, isUser)}{nl}";
                                             regStr += $"{GetRegKeyString(ValueName, languageCode)}{nl}";
-                                            regStr += $"{GetRegTypeString(Microsoft.Win32.RegistryValueKind.String, languageCode)}{nl}";
+                                            regStr += $"{GetRegTypeString(RegistryValueKind.String, languageCode)}{nl}";
                                             regStr += $"{GetRegValueString(Value.StringValue, languageCode)}{nl}";
                                             regStr += $"Delete the value.{nl}";
                                             regStr += $"{nl}";

@@ -978,10 +978,10 @@ namespace PolicyPlus
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Show author and version information if it was compiled into the program
-            string about = $"Policy Plus by Ben Nordick.{System.Environment.NewLine}Modded by tttza.{System.Environment.NewLine}{System.Environment.NewLine}Available on GitHub: tttza/PolicyPlus.";
+            string about = $"Policy Plus by Ben Nordick.{Environment.NewLine}Modded by tttza.{Environment.NewLine}{Environment.NewLine}Available on GitHub: tttza/PolicyPlus.";
             var version = Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, 5);
             if (!string.IsNullOrEmpty(version))
-                about += $"{System.Environment.NewLine} Version: {version}";
+                about += $"{Environment.NewLine} Version: {version}";
             Interaction.MsgBox(about, MsgBoxStyle.Information);
         }
 
