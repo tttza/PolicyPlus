@@ -102,8 +102,8 @@ namespace PolicyPlus
             this.ComboAppliesTo = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.PoliciesList = new System.Windows.Forms.ListView();
-            this.ChSettingName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ChSettingID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ChSettingName = new System.Windows.Forms.ColumnHeader();
+            this.ChSettingID = new System.Windows.Forms.ColumnHeader();
             this.SettingInfoPanel = new System.Windows.Forms.Panel();
             this.PolicyInfoTable = new System.Windows.Forms.TableLayoutPanel();
             this.PolicyTitleLabel = new System.Windows.Forms.Label();
@@ -116,8 +116,8 @@ namespace PolicyPlus
             this.ComputerSourceLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.UserSourceLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.AppVersion = new System.Windows.Forms.ToolStripStatusLabel();
-            ChSettingEnabled = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            ChSettingCommented = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            ChSettingEnabled = new System.Windows.Forms.ColumnHeader();
+            ChSettingCommented = new System.Windows.Forms.ColumnHeader();
             ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             ToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             ToolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -208,6 +208,7 @@ namespace PolicyPlus
             this.HelpToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
+            this.MainMenu.Padding = new System.Windows.Forms.Padding(6, 3, 0, 3);
             this.MainMenu.Size = new System.Drawing.Size(1483, 30);
             this.MainMenu.TabIndex = 0;
             this.MainMenu.Text = "MenuStrip1";
@@ -472,14 +473,14 @@ namespace PolicyPlus
             // AboutToolStripMenuItem
             // 
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.AboutToolStripMenuItem.Text = "About";
             this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // AcquireADMXFilesToolStripMenuItem
             // 
             this.AcquireADMXFilesToolStripMenuItem.Name = "AcquireADMXFilesToolStripMenuItem";
-            this.AcquireADMXFilesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.AcquireADMXFilesToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.AcquireADMXFilesToolStripMenuItem.Text = "Acquire ADMX Files";
             this.AcquireADMXFilesToolStripMenuItem.Click += new System.EventHandler(this.AcquireADMXFilesToolStripMenuItem_Click);
             // 
@@ -489,8 +490,8 @@ namespace PolicyPlus
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.SplitContainer.Location = new System.Drawing.Point(0, 28);
-            this.SplitContainer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.SplitContainer.Location = new System.Drawing.Point(0, 37);
+            this.SplitContainer.Margin = new System.Windows.Forms.Padding(4);
             this.SplitContainer.Name = "SplitContainer";
             // 
             // SplitContainer.Panel1
@@ -504,7 +505,7 @@ namespace PolicyPlus
             this.SplitContainer.Panel2.BackColor = System.Drawing.Color.White;
             this.SplitContainer.Panel2.Controls.Add(this.panel1);
             this.SplitContainer.Panel2.Controls.Add(this.SettingInfoPanel);
-            this.SplitContainer.Size = new System.Drawing.Size(1483, 732);
+            this.SplitContainer.Size = new System.Drawing.Size(1483, 976);
             this.SplitContainer.SplitterDistance = 300;
             this.SplitContainer.SplitterWidth = 5;
             this.SplitContainer.TabIndex = 1;
@@ -515,9 +516,10 @@ namespace PolicyPlus
             this.panel3.AutoSize = true;
             this.panel3.Controls.Add(this.CategoriesTree);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 23);
+            this.panel3.Location = new System.Drawing.Point(0, 28);
+            this.panel3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(300, 709);
+            this.panel3.Size = new System.Drawing.Size(300, 948);
             this.panel3.TabIndex = 4;
             // 
             // CategoriesTree
@@ -529,11 +531,11 @@ namespace PolicyPlus
             this.CategoriesTree.ImageIndex = 0;
             this.CategoriesTree.ImageList = this.PolicyIcons;
             this.CategoriesTree.Location = new System.Drawing.Point(0, 0);
-            this.CategoriesTree.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.CategoriesTree.Margin = new System.Windows.Forms.Padding(4);
             this.CategoriesTree.Name = "CategoriesTree";
             this.CategoriesTree.SelectedImageIndex = 0;
             this.CategoriesTree.ShowNodeToolTips = true;
-            this.CategoriesTree.Size = new System.Drawing.Size(300, 709);
+            this.CategoriesTree.Size = new System.Drawing.Size(300, 948);
             this.CategoriesTree.TabIndex = 2;
             this.CategoriesTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.CategoriesTree_AfterSelect);
             this.CategoriesTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.CategoriesTree_NodeMouseClick);
@@ -596,7 +598,7 @@ namespace PolicyPlus
             // 
             // CmeCatOpen
             // 
-            this.CmeCatOpen.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CmeCatOpen.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CmeCatOpen.Name = "CmeCatOpen";
             this.CmeCatOpen.Size = new System.Drawing.Size(248, 24);
             this.CmeCatOpen.Tag = "C";
@@ -604,7 +606,7 @@ namespace PolicyPlus
             // 
             // CmePolEdit
             // 
-            this.CmePolEdit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CmePolEdit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CmePolEdit.Name = "CmePolEdit";
             this.CmePolEdit.Size = new System.Drawing.Size(248, 24);
             this.CmePolEdit.Tag = "P";
@@ -639,6 +641,7 @@ namespace PolicyPlus
             // 
             // PolicyIcons
             // 
+            this.PolicyIcons.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.PolicyIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("PolicyIcons.ImageStream")));
             this.PolicyIcons.TransparentColor = System.Drawing.Color.Transparent;
             this.PolicyIcons.Images.SetKeyName(0, "folder.png");
@@ -691,8 +694,9 @@ namespace PolicyPlus
             this.panel2.Controls.Add(this.ComboAppliesTo);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(300, 23);
+            this.panel2.Size = new System.Drawing.Size(300, 28);
             this.panel2.TabIndex = 3;
             // 
             // ComboAppliesTo
@@ -704,9 +708,9 @@ namespace PolicyPlus
             "User",
             "Computer"});
             this.ComboAppliesTo.Location = new System.Drawing.Point(0, 0);
-            this.ComboAppliesTo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.ComboAppliesTo.Margin = new System.Windows.Forms.Padding(4);
             this.ComboAppliesTo.Name = "ComboAppliesTo";
-            this.ComboAppliesTo.Size = new System.Drawing.Size(300, 23);
+            this.ComboAppliesTo.Size = new System.Drawing.Size(300, 28);
             this.ComboAppliesTo.TabIndex = 1;
             this.ComboAppliesTo.SelectedIndexChanged += new System.EventHandler(this.ComboAppliesTo_SelectedIndexChanged);
             // 
@@ -718,8 +722,9 @@ namespace PolicyPlus
             this.panel1.Controls.Add(this.PoliciesList);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(878, 732);
+            this.panel1.Size = new System.Drawing.Size(878, 976);
             this.panel1.TabIndex = 4;
             // 
             // PoliciesList
@@ -733,13 +738,12 @@ namespace PolicyPlus
             this.PoliciesList.ContextMenuStrip = this.PolicyObjectContext;
             this.PoliciesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PoliciesList.FullRowSelect = true;
-            this.PoliciesList.HideSelection = false;
             this.PoliciesList.Location = new System.Drawing.Point(0, 0);
-            this.PoliciesList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.PoliciesList.Margin = new System.Windows.Forms.Padding(4);
             this.PoliciesList.MultiSelect = false;
             this.PoliciesList.Name = "PoliciesList";
             this.PoliciesList.ShowItemToolTips = true;
-            this.PoliciesList.Size = new System.Drawing.Size(878, 732);
+            this.PoliciesList.Size = new System.Drawing.Size(878, 976);
             this.PoliciesList.SmallImageList = this.PolicyIcons;
             this.PoliciesList.TabIndex = 3;
             this.PoliciesList.UseCompatibleStateImageBehavior = false;
@@ -767,9 +771,9 @@ namespace PolicyPlus
             this.SettingInfoPanel.Controls.Add(this.PolicyInfoTable);
             this.SettingInfoPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.SettingInfoPanel.Location = new System.Drawing.Point(878, 0);
-            this.SettingInfoPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.SettingInfoPanel.Margin = new System.Windows.Forms.Padding(4);
             this.SettingInfoPanel.Name = "SettingInfoPanel";
-            this.SettingInfoPanel.Size = new System.Drawing.Size(300, 732);
+            this.SettingInfoPanel.Size = new System.Drawing.Size(300, 976);
             this.SettingInfoPanel.TabIndex = 0;
             this.SettingInfoPanel.ClientSizeChanged += new System.EventHandler(this.SettingInfoPanel_ClientSizeChanged);
             this.SettingInfoPanel.SizeChanged += new System.EventHandler(this.SettingInfoPanel_ClientSizeChanged);
@@ -784,24 +788,24 @@ namespace PolicyPlus
             this.PolicyInfoTable.Controls.Add(this.PolicySupportedLabel, 0, 1);
             this.PolicyInfoTable.Controls.Add(this.PolicyDescLabel, 0, 3);
             this.PolicyInfoTable.Controls.Add(this.PolicyIsPrefTable, 0, 2);
-            this.PolicyInfoTable.Location = new System.Drawing.Point(4, 3);
-            this.PolicyInfoTable.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.PolicyInfoTable.Location = new System.Drawing.Point(4, 4);
+            this.PolicyInfoTable.Margin = new System.Windows.Forms.Padding(4);
             this.PolicyInfoTable.Name = "PolicyInfoTable";
             this.PolicyInfoTable.RowCount = 5;
             this.PolicyInfoTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.PolicyInfoTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.PolicyInfoTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.PolicyInfoTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.PolicyInfoTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.PolicyInfoTable.Size = new System.Drawing.Size(941, 179);
+            this.PolicyInfoTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.PolicyInfoTable.Size = new System.Drawing.Size(941, 227);
             this.PolicyInfoTable.TabIndex = 0;
             // 
             // PolicyTitleLabel
             // 
             this.PolicyTitleLabel.AutoSize = true;
-            this.PolicyTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PolicyTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.PolicyTitleLabel.Location = new System.Drawing.Point(4, 0);
-            this.PolicyTitleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 28);
+            this.PolicyTitleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 37);
             this.PolicyTitleLabel.Name = "PolicyTitleLabel";
             this.PolicyTitleLabel.Size = new System.Drawing.Size(83, 17);
             this.PolicyTitleLabel.TabIndex = 0;
@@ -811,10 +815,10 @@ namespace PolicyPlus
             // PolicySupportedLabel
             // 
             this.PolicySupportedLabel.AutoSize = true;
-            this.PolicySupportedLabel.Location = new System.Drawing.Point(4, 45);
-            this.PolicySupportedLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 28);
+            this.PolicySupportedLabel.Location = new System.Drawing.Point(4, 54);
+            this.PolicySupportedLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 37);
             this.PolicySupportedLabel.Name = "PolicySupportedLabel";
-            this.PolicySupportedLabel.Size = new System.Drawing.Size(94, 15);
+            this.PolicySupportedLabel.Size = new System.Drawing.Size(100, 20);
             this.PolicySupportedLabel.TabIndex = 1;
             this.PolicySupportedLabel.Text = "Requirements";
             this.PolicySupportedLabel.UseMnemonic = false;
@@ -822,10 +826,10 @@ namespace PolicyPlus
             // PolicyDescLabel
             // 
             this.PolicyDescLabel.AutoSize = true;
-            this.PolicyDescLabel.Location = new System.Drawing.Point(4, 141);
+            this.PolicyDescLabel.Location = new System.Drawing.Point(4, 176);
             this.PolicyDescLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PolicyDescLabel.Name = "PolicyDescLabel";
-            this.PolicyDescLabel.Size = new System.Drawing.Size(119, 15);
+            this.PolicyDescLabel.Size = new System.Drawing.Size(126, 20);
             this.PolicyDescLabel.TabIndex = 2;
             this.PolicyDescLabel.Text = "Policy description";
             this.PolicyDescLabel.UseMnemonic = false;
@@ -839,19 +843,19 @@ namespace PolicyPlus
             this.PolicyIsPrefTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.PolicyIsPrefTable.Controls.Add(this.PictureBox1, 0, 0);
             this.PolicyIsPrefTable.Controls.Add(this.PolicyIsPrefLabel, 1, 0);
-            this.PolicyIsPrefTable.Location = new System.Drawing.Point(4, 91);
-            this.PolicyIsPrefTable.Margin = new System.Windows.Forms.Padding(4, 3, 0, 28);
+            this.PolicyIsPrefTable.Location = new System.Drawing.Point(4, 115);
+            this.PolicyIsPrefTable.Margin = new System.Windows.Forms.Padding(4, 4, 0, 37);
             this.PolicyIsPrefTable.Name = "PolicyIsPrefTable";
             this.PolicyIsPrefTable.RowCount = 1;
             this.PolicyIsPrefTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.PolicyIsPrefTable.Size = new System.Drawing.Size(937, 22);
+            this.PolicyIsPrefTable.Size = new System.Drawing.Size(937, 24);
             this.PolicyIsPrefTable.TabIndex = 4;
             // 
             // PictureBox1
             // 
             this.PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("PictureBox1.Image")));
-            this.PictureBox1.Location = new System.Drawing.Point(4, 3);
-            this.PictureBox1.Margin = new System.Windows.Forms.Padding(4, 3, 0, 3);
+            this.PictureBox1.Location = new System.Drawing.Point(4, 4);
+            this.PictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 0, 4);
             this.PictureBox1.Name = "PictureBox1";
             this.PictureBox1.Size = new System.Drawing.Size(16, 16);
             this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -864,7 +868,7 @@ namespace PolicyPlus
             this.PolicyIsPrefLabel.Location = new System.Drawing.Point(24, 0);
             this.PolicyIsPrefLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PolicyIsPrefLabel.Name = "PolicyIsPrefLabel";
-            this.PolicyIsPrefLabel.Size = new System.Drawing.Size(970, 15);
+            this.PolicyIsPrefLabel.Size = new System.Drawing.Size(987, 20);
             this.PolicyIsPrefLabel.TabIndex = 1;
             this.PolicyIsPrefLabel.Text = "Because it is not stored in a Policies section of the Registry, this policy is a " +
     "preference and will not be automatically undone if the setting is removed.";
@@ -878,7 +882,7 @@ namespace PolicyPlus
             ToolStripStatusLabel2,
             this.UserSourceLabel,
             this.AppVersion});
-            this.InfoStrip.Location = new System.Drawing.Point(0, 763);
+            this.InfoStrip.Location = new System.Drawing.Point(0, 1026);
             this.InfoStrip.Name = "InfoStrip";
             this.InfoStrip.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
             this.InfoStrip.Size = new System.Drawing.Size(1483, 26);
@@ -908,15 +912,15 @@ namespace PolicyPlus
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1483, 789);
+            this.ClientSize = new System.Drawing.Size(1483, 1052);
             this.Controls.Add(this.InfoStrip);
             this.Controls.Add(this.MainMenu);
             this.Controls.Add(this.SplitContainer);
             this.MainMenuStrip = this.MainMenu;
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.MinimumSize = new System.Drawing.Size(794, 454);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(794, 590);
             this.Name = "Main";
             this.ShowIcon = false;
             this.Text = "Policy Plus";

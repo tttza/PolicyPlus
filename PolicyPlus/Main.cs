@@ -808,7 +808,7 @@ namespace PolicyPlus
         private void OpenADMXFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Open a single ADMX file
-            using (var ofd = new OpenFileDialog())
+            using (var ofd = new System.Windows.Forms.OpenFileDialog())
             {
                 ofd.Filter = "Policy definitions files|*.admx";
                 ofd.Title = "Open ADMX file";
@@ -1114,7 +1114,7 @@ namespace PolicyPlus
         private void ImportPOLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Open a POL file and write it to a policy source
-            using (var ofd = new OpenFileDialog())
+            using (var ofd = new System.Windows.Forms.OpenFileDialog())
             {
                 ofd.Filter = "POL files|*.pol";
                 if (ofd.ShowDialog() == DialogResult.OK)
@@ -1144,7 +1144,7 @@ namespace PolicyPlus
         private void ExportPOLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Create a POL file from a current policy source
-            using (var sfd = new SaveFileDialog())
+            using (var sfd = new System.Windows.Forms.SaveFileDialog())
             {
                 sfd.Filter = "POL files|*.pol";
                 if (sfd.ShowDialog() == DialogResult.OK && My.MyProject.Forms.OpenSection.PresentDialog(true, true) == DialogResult.OK)
@@ -1355,6 +1355,16 @@ namespace PolicyPlus
             {
                 CopyToClipboard(polObject, e);
             }
+        }
+
+        private void toolTip1_Popup(object sender, PopupEventArgs e)
+        {
+
+        }
+
+        private void infoTip_Popup(object sender, PopupEventArgs e)
+        {
+
         }
 
         private void CopyToClipboard(object polObject, ToolStripItemClickedEventArgs e)
