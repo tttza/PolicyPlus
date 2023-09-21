@@ -74,14 +74,16 @@ namespace PolicyPlus
 
             void takeOwnership(string Folder)
             {
-                var dacl = System.IO.Directory.GetAccessControl(Folder);
+                var dirInfo = new DirectoryInfo(Folder);
+
+                var dacl = dirInfo.GetAccessControl();
                 var adminSid = new System.Security.Principal.SecurityIdentifier(System.Security.Principal.WellKnownSidType.BuiltinAdministratorsSid, null);
                 dacl.SetOwner(adminSid);
-                System.IO.Directory.SetAccessControl(Folder, dacl);
-                dacl = System.IO.Directory.GetAccessControl(Folder);
+                dirInfo.SetAccessControl(dacl);
+                dacl = dirInfo.GetAccessControl();
                 var allowRule = new System.Security.AccessControl.FileSystemAccessRule(adminSid, System.Security.AccessControl.FileSystemRights.FullControl, System.Security.AccessControl.AccessControlType.Allow);
                 dacl.AddAccessRule(allowRule);
-                System.IO.Directory.SetAccessControl(Folder, dacl);
+                dirInfo.SetAccessControl(dacl);
             };
             void moveFilesInDir(string Source, string Dest, bool InheritAcl)
             {
@@ -93,7 +95,8 @@ namespace PolicyPlus
                     {
                         var dirAcl = new System.Security.AccessControl.DirectorySecurity();
                         dirAcl.SetAccessRuleProtection(false, true);
-                        System.IO.Directory.SetAccessControl(Dest, dirAcl);
+                        var dirInfo = new DirectoryInfo(Dest);
+                        dirInfo.SetAccessControl(dirAcl);
                     }
                     else if (!creatingNew)
                     {
@@ -105,6 +108,7 @@ namespace PolicyPlus
                 {
                     string plainFilename = System.IO.Path.GetFileName(file);
                     string newName = System.IO.Path.Combine(Dest, plainFilename);
+                    var fileInfo = new FileInfo(newName);
                     if (System.IO.File.Exists(newName))
                         System.IO.File.Delete(newName);
                     System.IO.File.Move(file, newName);
@@ -112,7 +116,10 @@ namespace PolicyPlus
                     {
                         var fileAcl = new System.Security.AccessControl.FileSecurity();
                         fileAcl.SetAccessRuleProtection(false, true);
-                        System.IO.File.SetAccessControl(newName, fileAcl);
+                        if (file is not null)
+                        {
+                            fileInfo.SetAccessControl(fileAcl);
+                        }
                     }
                 }
             };
